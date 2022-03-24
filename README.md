@@ -6,7 +6,7 @@ try--12
 
 --------------save point 1
 
-docker container run -it -d --name tomcatcontainer1 -p 8080:8080 masumcse/fardeen-dev:latest
+docker container run -it -d --name tomcatcontainer1 -p 8080:8080 masumcse/masruba-dev:latest
 
 --------------------------------working fine--------
 
