@@ -214,7 +214,7 @@ COPY ${HOST_MVN_SETTINGS_PATH}/settings.xml ${MAVEN_CONFIG}/settings.xml
 COPY --chown=jboss:jboss . /tmp/meveo
 RUN cd /tmp/meveo 
 RUN ls -la
-RUN chmod +x deploy.sh
+RUN chmod +x ./deploy.sh
 # Build meveo source and deploy meveo.war
   
 #RUN chown jboss:jboss ./meveo-admin/web/target/meveo.war \
