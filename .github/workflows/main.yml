@@ -5,9 +5,7 @@ on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches:
-      -  main 
-    
-
+      -  main   
 
 jobs:
   build-dev:
@@ -48,8 +46,7 @@ jobs:
             push: true
             tags:  ${{ secrets.DOCKER_HUB_USERNAME }}/masruba-dev:latest
             cache-from: type=local,src=/tmp/.buildx-dev-cache
-            cache-to: type=local,dest=/tmp/.buildx-dev-cache
-            
+            cache-to: type=local,dest=/tmp/.buildx-dev-cache            
   
         - name: Image digest
           run: echo ${{ steps.docker_build_dev.outputs.digest }}
