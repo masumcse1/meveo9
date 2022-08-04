@@ -5,7 +5,7 @@
 	<groupId>org.meveo</groupId>
 	<artifactId>meveo9</artifactId>
 	<packaging>pom</packaging>
-	<version>7.0.0-SNAPSHOT</version>
+	<version>7.1.0-SNAPSHOT</version>
 	<name>Meveo Parent Project</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,7 +15,7 @@
 		<dbtype>generic</dbtype>
 		<releaseOption />
 		<jackson.version>2.9.10</jackson.version> <!-- Version used in Wildfly 18, impossible to update -->
-		<scm.url>scm:git:git@github.com:masumcse1/meveo9.git</scm.url>
+		<scm.url>scm:git:git@github.com:meveo-org/meveo.git</scm.url>
 		<aether.version>1.1.0</aether.version>
 	</properties>
 
@@ -33,6 +33,7 @@
 		<module>meveo-api-dto</module>
 		<module>meveo-json-schema</module>
 		<module>meveo-el-resolver</module>
+		<module>jmeter.sampler</module>
 		<module>meveo-ws</module>
 		<module>meveo-reporting</module>
 	</modules>
@@ -127,6 +128,11 @@
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
 				<version>3.10</version>
+			</dependency>
+			<dependency>
+			    <groupId>org.apache.commons</groupId>
+			    <artifactId>commons-pool2</artifactId>
+			    <version>2.11.1</version>
 			</dependency>
 			<dependency>
 				<groupId>commons-lang</groupId>
@@ -332,11 +338,6 @@
 				<version>1.0.2.Final</version>
 			</dependency>
 			<dependency>
-				<groupId>org.elasticsearch</groupId>
-				<artifactId>elasticsearch</artifactId>
-				<version>6.6.1</version>
-			</dependency>
-			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-databind</artifactId>
 				<version>${jackson.version}</version>
@@ -408,6 +409,19 @@
 				<version>2.7.0</version>
 				<scope>test</scope>
 			</dependency>
+
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>4.5.10</version>
+			</dependency>
+		
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpcore</artifactId>
+				<version>4.4.12</version>
+			</dependency>
+			
 		</dependencies>
 	</dependencyManagement>
 	<build>
@@ -421,6 +435,7 @@
 						<arguments>${releaseOption}</arguments>
 						<checkModificationExcludes>
 							<checkModificationExclude>pom.xml</checkModificationExclude>
+							<checkModificationExclude>settings.xml</checkModificationExclude>
 						</checkModificationExcludes>
 					</configuration>
 				</plugin>
@@ -552,8 +567,6 @@
 			</plugin>
 		</plugins>
 	</reporting>
-	
-	
 	<profiles>
 		<profile>
 			<id>github</id>
@@ -564,7 +577,7 @@
 				<repository>
 					<id>github</id>
 					<name>GitHub meveo-org Apache Maven Packages</name>
-					<url>https://maven.pkg.github.com/masumcse1/meveo9</url>
+					<url>https://maven.pkg.github.com/meveo-org/meveo</url>
 				</repository>
 			</distributionManagement>
 		</profile>

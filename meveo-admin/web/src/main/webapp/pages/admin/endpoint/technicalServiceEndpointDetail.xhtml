@@ -7,8 +7,8 @@
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
 	xmlns:s="http://jboss.org/seam/faces" template="/layout/template.xhtml">
 
-	<o:importConstants
-		type="org.meveo.model.technicalservice.endpoint.EndpointHttpMethod" />
+	<o:importConstants type="org.meveo.model.technicalservice.endpoint.EndpointHttpMethod" />
+	
 	<ui:define name="metadata">
 		<f:metadata>
 			<f:viewParam name="objectId" value="#{endpointBean.objectId}" />
@@ -75,6 +75,24 @@
 				<hftl:formField label="#{messages['endpoint.synchronous']}" field="synchronous" />
 			</h:panelGrid>
 			
+			<p:fieldset legend="Pool" id="pool" toggleable="true" collapsed="#{!endpointBean.entity.pool.usePool}">
+				<hftl:formField label="Enable pool usage" id="usePool"
+                    field="pool"
+                    childField="usePool"/>
+                    
+                <hftl:formField label="Minimum number of instances" id="min"
+                    field="pool"
+                    childField="min"/>
+                    
+                 <hftl:formField label="Maximum number of instances" id="max"
+                    field="pool"
+                    childField="max"/>
+                    
+                 <hftl:formField label="Idle time before eviction" id="maxIdleTime"
+                    field="pool"
+                    childField="maxIdleTime"/>   
+			</p:fieldset>
+			
 			<h:panelGroup id="functionInputs">
 				<hftl:decorateFormField componentWidth="100%"
 					rendered="#{notificationBean.entity.function.hasInputs()}"
@@ -137,10 +155,12 @@
 								headerText="#{messages['endpoint.parameters.mapping.default']}">
 								<h:inputText value="#{item.defaultValue}" size="40" />
 							</p:column>
+							<p:column headerText="Multi-valued">
+								<h:selectBooleanCheckbox value="#{item.multivalued}" style="width:100px" />
+							</p:column>
 							<p:column
 								headerText="#{messages['endpoint.parameters.mapping.valueRequired']}">
-								<h:selectBooleanCheckbox value="#{item.valueRequired}"
-									style="width:200px" />
+								<h:selectBooleanCheckbox value="#{item.valueRequired}" style="width:100px" />
 							</p:column>
 						</p:dataTable>
 					</hftl:decorateFormField>

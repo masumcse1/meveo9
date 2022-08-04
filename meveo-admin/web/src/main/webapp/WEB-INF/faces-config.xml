@@ -2,7 +2,10 @@
 <!-- This file is not required if you don't need any extra configuration. -->
 <faces-config version="2.3" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation=" http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd">
 
-   
+    <factory>
+        <exception-handler-factory>org.meveo.admin.web.handler.CustomExceptionHandlerFactory</exception-handler-factory>
+	</factory>
+
     <application>
         <locale-config>
             <default-locale>en</default-locale>
@@ -18,9 +21,29 @@
         </resource-bundle>
         <message-bundle>messages</message-bundle>
 
+        <action-listener>org.primefaces.application.DialogActionListener</action-listener>
+        <navigation-handler>org.primefaces.application.DialogNavigationHandler</navigation-handler>
+        <view-handler>org.primefaces.application.DialogViewHandler</view-handler>
+        <view-handler>org.meveo.admin.web.handler.ScreenSizeChangeEventHandler</view-handler>
     </application>
 
- 
+    <component>
+        <component-type>org.primefaces.component.MeveoMenu</component-type>
+        <component-class>org.meveo.util.view.composite.MeveoMenu</component-class>
+    </component>
+
+    <render-kit>
+        <renderer>
+            <component-family>org.primefaces.component</component-family>
+            <renderer-type>org.primefaces.component.MeveoMenuRenderer</renderer-type>
+            <renderer-class>org.meveo.util.view.composite.MeveoMenuRenderer</renderer-class>
+        </renderer>
+    </render-kit>
+
+    <lifecycle>
+        <phase-listener>org.meveo.admin.web.listener.PageAccessListener</phase-listener>
+        <!-- 	<phase-listener>org.meveo.util.view.LifeCycleListener</phase-listener> -->
+    </lifecycle>
 
     <navigation-rule>
 
